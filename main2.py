@@ -157,10 +157,10 @@ async def create_file(file: Annotated[bytes, File()]):
 
 @app.get("/")
 async def main(current_user : Annotated[User, Depends(get_current_active_user)]):
-    if not current_user:
+    if current_user:
         return FileResponse('view/index.html')
     else:
-        return FileResponse('view/index.html')
+        return FileResponse('view/login.html')
 
 @app.post("/upload")
 async def create_upload_file(file: UploadFile, current_user : Annotated[User, Depends(get_current_active_user)] ):
